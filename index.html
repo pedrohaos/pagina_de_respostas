@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Respostas do Questionário</title>
+<style>
+  /* Estilos para a barra de pesquisa */
+  #search-bar {
+    margin-bottom: 20px;
+  }
+  #search-input {
+    width: 300px;
+    padding: 5px;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra de pesquisa -->
+<div id="search-bar">
+  <input type="text" id="search-input" placeholder="Pesquisar pergunta...">
+</div>
+
+<!-- Respostas das perguntas -->
+<div id="respostas">
+  <!-- Aqui serão exibidas as perguntas e respostas conforme a pesquisa -->
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Array com as perguntas e respostas
+  const perguntasRespostas = [
+    {
+      pergunta: 'Qual é a capital da França?',
+      resposta: 'b) Paris'
+    },
+    {
+      pergunta: 'Qual é o maior planeta do Sistema Solar?',
+      resposta: 'b) Júpiter'
+    },
+    {
+      pergunta: 'Quem escreveu "Dom Quixote"?',
+      resposta: 'b) Miguel de Cervantes'
+    }
+  ];
+
+  // Elementos
+  const searchInput = document.getElementById('search-input');
+  const respostasContainer = document.getElementById('respostas');
+
+  // Função para renderizar as perguntas e respostas
+  function renderizarPerguntasRespostas(perguntasRespostasFiltradas) {
+    respostasContainer.innerHTML = ''; // Limpar o conteúdo anterior
+    perguntasRespostasFiltradas.forEach(function(item) {
+      const div = document.createElement('div');
+      div.innerHTML = `<h3>${item.pergunta}</h3><p>Resposta: ${item.resposta}</p>`;
+      respostasContainer.appendChild(div);
+    });
+  }
+
+  // Evento de digitação na barra de pesquisa
+  searchInput.addEventListener('input', function() {
+    const termoPesquisa = searchInput.value.toLowerCase();
+    const perguntasFiltradas = perguntasRespostas.filter(function(item) {
+      return item.pergunta.toLowerCase().includes(termoPesquisa);
+    });
+    renderizarPerguntasRespostas(perguntasFiltradas);
+  });
+
+  // Renderizar todas as perguntas e respostas no carregamento inicial
+  renderizarPerguntasRespostas(perguntasRespostas);
+});
+</script>
+
+</body>
+</html>
